@@ -1,0 +1,74 @@
+//------- variables
+$cell-border-light: #f0f0f0;
+$cell-border-dark: transparent;
+$cell-gradient-light: #eee;
+$cell-gradient-dark: #d0d0d0;
+$cell-open-background: #cfcdcd;
+
+//------- mixins
+@mixin gradient($start-color: #555, $end-color: #333, $deg: 45deg) {
+  background-image: linear-gradient($deg, $start-color, $end-color);
+
+}
+//------- styles
+body {
+  background-color: #0e2d27;
+
+}
+// content container
+#container {
+  width: 80%;
+  margin: auto;
+  min-width: 128px;
+  max-width: 50%;
+
+}
+// table
+#minefield {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 1px;
+  background: #aba9a9;
+  border: 2px solid #badbc5;
+  border-top: none;
+  td {
+    position: relative;
+    // rule provides automatic proportional height for the cells
+    &:after {
+      content: '';
+      display: block;
+      margin-top: 100%;
+
+    }
+    div {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-width: 1px;
+      border-style: solid;
+      border-color: $cell-border-light $cell-border-dark $cell-border-dark $cell-border-light;
+      background: $cell-gradient-light;
+      @include gradient($cell-gradient-dark, $cell-gradient-light, 135deg);
+      transition: all 200ms linear;
+      background-size: 100% 100%;
+
+      &:hover {
+        background-size: 400% 10%;
+        border-color: $cell-border-light;
+
+      }
+      &.open {
+        background: $cell-open-background;
+        border-color: $cell-border-dark;
+      }
+
+    }
+    //end: div
+
+  }
+  //end: td
+
+}
+//end: #game-field
