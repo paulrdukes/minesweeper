@@ -11,101 +11,49 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="lib/normalize.css/normalize.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <!-- app css -->
     <link rel="stylesheet" href="css/minesweeper.min.css">
 
     <!-- vendor js -->
-    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/lodash/dist/lodash.min.js"></script>
     <!-- app js -->
     <script src="js/main.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/cell.js"></script>
+    <script src="js/game.js"></script>
   </head>
 
-  <body>
-    <div id="container">
+  <body ng-app="minesweeper">
 
-          <table id="minefield">
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-            <tr>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-              <td><div></div></td>
-            </tr>
-          </table>
+    <div id="container" class="no-text-select" ng-controller="MainController" ng-cloak>
+
+      <div id="stats" ng-class="{win: Game.gameWon === true, loose: Game.gameWon === false}">
+        <div class="counter"><i class="fa fa-bomb"></i> {{Game.minesLeft}}</div>
+        <div class="counter"><i class="fa fa-clock-o"></i> {{Game.timer}}</div>
+        <div id="new-game-btn" ng-click="Game.startNewGame()">
+          <i ng-if="Game.gameWon === false" class="fa fa-frown-o"></i>
+          <i ng-if="Game.gameWon !== false" class="fa fa-smile-o"></i>
         </div>
+      </div>
+
+      <table id="minefield" ng-cloak>
+        <tr ng-repeat="row in Game.cells">
+          <td ng-repeat="cell in row">
+            <div ng-class="{open:cell.isOpen, unclickable: cell.flag === flags.Mine || Game.gameWon!==null}"
+                 ng-click="onCellClick(cell)" ng-right-click="onCellRightClick(cell)">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" shape-rendering="crispEdges"
+                   width="100%" height="100%" viewBox="0 0 24 24">
+                <text x="12" y="20" class="svgicon" ng-bind="cell.icon"></text>
+              </svg>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+    <!-- end container-->
 
   </body>
 

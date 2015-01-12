@@ -1,5 +1,7 @@
+'use strict';
+
 var gulp      = require('gulp');
-var rename      = require('gulp-rename');
+var rename    = require('gulp-rename');
 var webserver = require('gulp-webserver');
 var sass      = require('gulp-sass');
 var minifyCSS = require('gulp-minify-css');
@@ -8,7 +10,7 @@ var minifyCSS = require('gulp-minify-css');
 var server = {
   host: 'localhost',
   port: '8001'
-}
+};
 
 gulp.task('sass', function () {
   gulp.src( 'css/*.scss' )
