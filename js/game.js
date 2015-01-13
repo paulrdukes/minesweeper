@@ -72,7 +72,7 @@ angular.module("minesweeper")
       endGame(true);
       var id = 0;
       while ((cell = getCellById(id++)) !== null)
-        if (!cell.isOpen && !cell.hasMine) cell.gameOver();
+        if (!cell.isOpen && cell.hasMine) cell.gameOver();
     }
   };
 
