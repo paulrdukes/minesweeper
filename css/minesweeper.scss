@@ -122,6 +122,9 @@ body {
         border-width: initial;
         cursor: default;
       }
+      &.blown{
+        background: red;
+      }
 
     }
     //end: div
@@ -135,13 +138,25 @@ body {
 }
 //end: #game-field
 
+#credits{
+  padding-top: 16px;
+  font-size: 12px;
+  text-align: right;
+  a, a:visited{
+    text-decoration: none;
+    color:inherit;
+  }
+  a:hover{
+    text-shadow:1px 1px 8px white;
+  }
+}
+
 .svgicon {
   text-anchor: middle;
   font-family: FontAwesome;
   font-size: 18px;
   text-shadow: #fff 0 0 3px;
   fill: #808080;
-
 }
 
 .no-text-select {

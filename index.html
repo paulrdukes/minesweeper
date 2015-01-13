@@ -41,17 +41,17 @@
       <table id="minefield" ng-cloak>
         <tr ng-repeat="row in Game.cells">
           <td ng-repeat="cell in row">
-            <div ng-class="{open:cell.isOpen, unclickable: cell.flag === flags.Mine || Game.gameWon!==null}"
+            <div ng-class="{open:cell.isOpen, unclickable: cell.flag === flags.Mine || Game.gameWon!==null, blown: cell.isBlown}"
                  ng-click="onCellClick(cell)" ng-right-click="onCellRightClick(cell)">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" shape-rendering="crispEdges"
                    width="100%" height="100%" viewBox="0 0 24 24">
-                <text x="12" y="20" class="svgicon" ng-bind="cell.icon" ng-class="{loose: cell.isBlown}"></text>
+                <text x="12" y="20" class="svgicon" ng-bind="cell.icon"></text>
               </svg>
             </div>
           </td>
         </tr>
       </table>
-
+      <div id="credits"><a href="mailto:anri82@gmail.com">Anri Asaturov</a> / <a href="https://github.com/anri-asaturov/minesweeper/">Source on Github.</a></div>
     </div>
     <!-- end container-->
     <script>
