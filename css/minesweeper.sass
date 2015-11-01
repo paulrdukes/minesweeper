@@ -1,0 +1,201 @@
+@import 'variables/variables'
+@import 'mixins/mixins'
+
+// apply a natural box layout model to all elements, but allowing components to change
+// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
+//------- styles
+body
+  background-color: $bg-color-body
+  font: 16px/1.5 'VT323', sans-serif
+  color: $black-87
+  transition: all 0.3s
+
+// top panel
+.toolbar
+  background-color: $bg-color-stats
+  padding: 0 $base-padding
+  font-size: 34px
+  line-height: 64px
+  color: $white-30
+  transition:  0.3s ease
+  height: 64px
+  line-height: 64px
+  position: fixed
+  left: 0
+  right: 0
+  top: 0
+  z-index: 1
+  box-shadow: $high-box-shadow
+
+  &.lose
+    background-color: $bg-color-lose
+  &.win
+    background-color: $bg-color-win
+    color: $black-54
+
+.button
+  font-size: 34px
+  margin: 0 0 0 -71px
+  position: absolute
+  width: 142px
+  left: 50%
+  top: 0
+  opacity: 0
+  display: inline-block
+  margin-right: $base-margin
+  cursor: pointer
+  transition: 0.3s
+
+  &.lose,
+  &.win
+    opacity: 1
+    top: 64px
+
+  &:hover
+    color: $black-38
+
+.color-select
+  display: inline-block
+  float: right
+  height: 64px
+
+  .toggle-blue,
+  .toggle-pink,
+  .toggle-blue-grey
+    display: inline-block
+    margin: 16px 8px
+    width: 32px
+    height: 32px
+    transition:  all 0.3s ease
+    cursor: pointer
+    border:  0 solid transparent
+.pink .toggle-pink,
+.blue .toggle-blue,
+.blue-grey .toggle-blue-grey
+    border: 4px solid $white-30
+.toggle-blue
+  background-color: $m500_blue
+
+  &:hover
+    background-color: $m700_blue
+
+.toggle-pink
+  background: $m500_pink
+
+  &:hover
+    background-color: $m700_pink
+
+.toggle-blue-grey
+  background: $m500_blue-grey
+
+  &:hover
+    background-color: $m700_blue-grey
+
+.title,
+.counter
+  display: inline-block
+  margin: 0 $base-margin
+
+.counter
+  i
+    font-size: 34px
+    vertical-align: text-bottom
+    margin: 0 $base-margin
+  &.bombs
+    i
+      margin: 0
+
+// game field table element
+#minefield
+  margin: 128px auto 0
+  background-color: $bg-color-minefield
+  width: 480px
+  border-collapse: collapse
+  table-layout: fixed
+  box-shadow: $low-box-shadow
+
+  td
+    overflow: hidden
+    position: relative
+    // rule provides automatic proportional height for the cells
+    &:after
+      content: ''
+      display: block
+      margin-top: 100%
+
+    div
+      overflow: hidden
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      margin: 2px
+      border-width: 4px
+      border-style: solid
+      border-color: $color-border
+      background: $bg-color-cell
+      transition: all 0.3s ease
+      background-size: 100% 100%
+      text-align: center
+      font-size: 36px
+      cursor: pointer
+      color: $black-87
+      // when cell is marked as "mine" it's unclickable
+
+      &.open
+        background: $bg-color-cell-open
+        border-width: 0
+
+      &:hover:not(.open)
+        border-width: 2px
+        background-color: $bg-color-cell-hover
+
+      &.unclickable:hover, &.open:hover
+        border-width: 0
+        cursor: default
+
+      &.blown
+        background: $bg-color-lose
+
+    //end: div
+    i
+      color: $white
+
+  //end: td
+//end: #game-field
+
+.credits
+  position: fixed
+  bottom: 0
+  right: 0
+  left: 0
+  padding: $base-padding $base-padding 20px
+  font-size: 16px
+  text-shadow: 0 0 0 $black-38
+  text-align: right
+  color: $white-30
+  a, a:visited
+    font-size: 18px
+    color: $white-12
+    transition: color 0.3s ease
+    text-decoration: none
+
+  a:hover
+    color: $white-100
+
+.no-text-select
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+
+// Themes
+@import 'themes'

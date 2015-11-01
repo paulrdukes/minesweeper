@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,8 +11,11 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="lib/normalize.css/normalize.css">
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- app css -->
     <link rel="stylesheet" href="css/minesweeper.min.css">
+
 
     <!-- vendor js -->
     <script src="lib/angular/angular.min.js"></script>
@@ -25,33 +27,68 @@
     <script src="js/game.js"></script>
   </head>
 
-  <body ng-app="minesweeper">
+  <body ng-app="minesweeper" ng-controller="MainController" ng-cloak ng-init="theme = 'blue'"
+        ng-class="{
+          blue: theme === 'blue',
+          pink: theme === 'pink',
+          'blue-grey': theme === 'blue-grey'
+        }">
+    <div class="no-text-select" >
 
-    <div id="container" class="no-text-select" ng-controller="MainController" ng-cloak>
+      <!-- STATS TOOLBAR -->
+      <div class="toolbar" ng-class="{win: Game.gameWon === true, lose: Game.gameWon === false}">
+        <div class="title">
+          Minesweeper
+        </div>
+        <div class="counter bombs"><i class="fa fa-bomb"></i> {{Game.minesLeft}}</div>
+        <div class="counter"><i class="material-icons">timer</i>{{Game.timer}}</div>
 
-      <div id="stats" ng-class="{win: Game.gameWon === true, loose: Game.gameWon === false}">
-        <div class="counter"><i class="fa fa-bomb"></i> {{Game.minesLeft}}</div>
-        <div class="counter"><i class="fa fa-clock-o"></i> {{Game.timer}}</div>
-        <div id="new-game-btn" ng-click="Game.startNewGame()">
-          <i ng-if="Game.gameWon === false" class="fa fa-frown-o"></i>
-          <i ng-if="Game.gameWon !== false" class="fa fa-smile-o"></i>
+        <div class="color-select">
+          <div class="toggle-blue" ng-click="theme = 'blue'">
+          </div>
+          <div class="toggle-pink" ng-click="theme = 'pink'">
+          </div>
+          <div class="toggle-blue-grey" ng-click="theme = 'blue-grey'">
+          </div>
         </div>
       </div>
+      <div class="button" ng-click="Game.startNewGame()" ng-class="{lose: Game.gameWon === false, win: Game.gameWon === true }">
+        <span ng-if="Game.gameWon === false">
+          <!-- <i  class="material-icons">mood_bad</i> -->
+          Try again?
+        </span>
+        <span ng-if="Game.gameWon === true">
+          <!-- <i  class="material-icons">mood_bad</i> -->
+          Congratulations! Try again?
+        </span>
+      </div>
 
+      <!--
+        maybe do a minefield directive that has a difficulty and size attritute
+        that takes a value from some kind of input, select or radio.
+
+        ex.
+        <minefield size="ctrl.size" diff="ctrl.diff"></minefield>
+      -->
       <table id="minefield" ng-cloak>
         <tr ng-repeat="row in Game.cells">
           <td ng-repeat="cell in row">
-            <div ng-class="{open:cell.isOpen, unclickable: cell.flag === flags.Mine || Game.gameWon!==null, blown: cell.isBlown}"
+            <div ng-class="{open:cell.isOpen, unclickable: cell.flag === flags.Mine || Game.gameWon!==null, blown: cell.isBlown || cell.isOpen && cell.hasMine}"
                  ng-click="onCellClick(cell)" ng-right-click="onCellRightClick(cell)">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" shape-rendering="crispEdges"
-                   width="100%" height="100%" viewBox="0 0 24 24">
-                <text x="12" y="20" class="svgicon" ng-bind="cell.icon"></text>
-              </svg>
+                 <i class="material-icons" ng-if="cell.flag === 1">flag</i>
+                 <i class="material-icons" ng-if="cell.flag === 2">help</i>
+                 <i class="material-icons" ng-if="cell.isBlown">new_releases</i>
+                 <!-- <i class="material-icons" ng-if="cell.isOpen && cell.hasMine">flag</i> -->
+                 <span ng-if="cell.isOpen && !cell.hasMine">{{cell.minesAround > 0 ?  cell.minesAround : " " }}</span>
             </div>
           </td>
         </tr>
       </table>
-      <div id="credits"><a href="mailto:anri82@gmail.com">Anri Asaturov</a> / <a href="https://github.com/anri-asaturov/minesweeper/">Source on Github.</a></div>
+      <div class="credits">
+        Forked from minesweeper project by
+        <a href="mailto:anri82@gmail.com">Anri Asaturov</a> /
+        <a href="https://github.com/anri-asaturov/minesweeper/">Source on Github.</a>
+      </div>
     </div>
     <!-- end container-->
     <script>

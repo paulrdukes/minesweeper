@@ -1,0 +1,32 @@
+//----- Pink Theme
+body.pink
+  background-color: $bg-color-body_pink
+  color: $white-70
+  
+  .toolbar
+    background-color: $bg-color-stats_pink
+
+    &.lose
+      background-color: $bg-color-lose_pink
+
+    &.win
+      background-color: $bg-color-win
+      color: $black-54
+
+  #minefield
+    background-color: $bg-color-minefield_pink
+    border-color: $bg-color-minefield_pink
+
+    div
+      border-color: $color-border_pink
+      background: $bg-color-cell_pink
+      color: $white-70
+
+      &.open
+        background: $bg-color-cell-open_pink
+      &:hover:not(.open)
+        background-color: $bg-color-cell-hover_pink
+      &.blown
+        background: $bg-color-lose_pink
+  .credits
+    text-shadow: 0 0 0 $white-30

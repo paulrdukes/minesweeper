@@ -8,18 +8,22 @@
     "gulp-webserver": "^0.9.0",
     "node-sass": "^2.0.0-beta"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-minify-css": "^1.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anri-asaturov/minesweeper.git"
+    "url": "https://github.com/paulrdukes/minesweeper"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anri-asaturov/minesweeper/issues"
+    "url": "https://github.com/paulrdukes/minesweeper/issues"
   },
-  "homepage": "https://github.com/anri-asaturov/minesweeper"
+  "homepage": "https://github.com/paulrdukes/minesweeper"
 }

@@ -13,7 +13,7 @@ var server = {
 };
 
 gulp.task('sass', function () {
-  gulp.src( 'css/*.scss' )
+  gulp.src( 'css/*.sass' )
   .pipe(sass())
   .pipe(minifyCSS())
   .pipe(rename({suffix: '.min'}))
@@ -32,7 +32,7 @@ gulp.task('webserver', function() {
 });
 
 gulp.task('watch', function(){
-  gulp.watch('css/*.scss', ['sass']);
+  gulp.watch('css/*.sass', ['sass']);
 });
 
 gulp.task('default', ['sass','webserver','watch']);

@@ -1,0 +1,32 @@
+//----- Blue Grey Theme
+body.blue-grey
+  background-color: $bg-color-body_blue-grey
+  color: $white-70
+
+  .toolbar
+    background-color: $bg-color-stats_blue-grey
+
+    &.lose
+      background-color: $bg-color-lose_blue-grey
+
+    &.win
+      background-color: $bg-color-win
+      color: $black-54
+  #minefield
+    background-color: $bg-color-minefield_blue-grey
+    border-color: $bg-color-minefield_blue-grey
+
+    div
+      border-color: $color-border_blue-grey
+      background: $bg-color-cell_blue-grey
+      color: $white-70
+
+      &.open
+        background: $bg-color-cell-open_blue-grey
+      &:hover:not(.open)
+        background-color: $bg-color-cell-hover_blue-grey
+        border-color: $color-border-hover_blue-grey
+      &.blown
+        background: $bg-color-lose_blue-grey
+  .credits
+    text-shadow: 0 0 0 $white-30
